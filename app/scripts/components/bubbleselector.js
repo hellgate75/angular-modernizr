@@ -20,7 +20,10 @@ angular.module('angularModernizrApp')
       this.$onInit = function() {};
       $scope.tabList = [];
       $scope.tabsShown = function() {
-        return true; //!!$scope.tabList.length;
+        return $scope.tabList && !!$scope.tabList.length; //!!$scope.tabList.length;
+      };
+      $scope.tabsHidden = function() {
+        return !$scope.tabsShown; //!!$scope.tabList.length;
       };
       var $commander = $scope.$parent.$parent;
       if ($commander) {

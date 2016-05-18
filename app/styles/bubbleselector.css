@@ -37,3 +37,6 @@
 .bubble-tab:hover {
   cursor: pointer;
 }
+.ng-hide {
+  dispay: none;
+}

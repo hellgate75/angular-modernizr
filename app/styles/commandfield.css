@@ -40,3 +40,25 @@ div.command-field-validator.invalid{
   background-position: 0 0;
   background-size: 25px 25px;
 }
+.command-field-message-empty {
+  min-width: 100px;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
+  float: left;
+  color: #286090;
+  font-weight: bold;
+  font-family: Arial, Monospace;
+  padding-top: 10px;
+}
+.command-field-message-incomplete {
+  min-width: 100px;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
+  float: left;
+  color: red;
+  font-weight: bold;
+  font-family: Arial, Monospace;
+  padding-top: 10px;
+}
