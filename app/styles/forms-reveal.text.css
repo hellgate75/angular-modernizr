@@ -1,0 +1,27 @@
+
+/*
+Note :after are not alllowed in <input>
+*/
+
+/* Clear existing on IE 10 */
+/*::-ms-clear {
+	display: none;
+}*/
+
+.forms-reveal {
+	margin: 0 0 0 -0.2em;
+	color: #666;
+	cursor: pointer;
+	font-style: normal;
+	font-size: 200%;
+	margin-left: 5px;
+}
+
+.forms-reveal:after {
+	position: relative;
+	top:.5em;
+	content: "\0900"; /* Devanagari sign inverted candrabindu - Not supported in some fonts */
+}
+.forms-reveal.icon-eye-open.ng-scope {
+	display: none;
+}
