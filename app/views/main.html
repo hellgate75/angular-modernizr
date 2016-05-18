@@ -7,7 +7,7 @@
   <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
 </div>
 
-<div class="row marketing" ng-controller="MainCtrl">
+<div class="row marketing" ng-controller="MainCtrl as ctrl">
 <form name="form">
   <h2>Modernizr</h2>
   <h3>Placeholder</h3>
@@ -19,5 +19,13 @@
   <div class="well">
   		<input type="password" name="password" data-ng-model="inputValue" required>
   </div>
+
+    <h3>Syntax-Command Field</h3>
+    <div class="well">
+      <command-field syntax-filter-func="filterSyntaxSuggestions" syntax-validator-func="validateSyntax" field-ref="syntaxInputValue">
+          <bubble-selector></bubble-selector>
+        </command-field>
+    </div>
+
 </form>
 </div>

@@ -1,0 +1,4 @@
+<div class="bubble-selector" ng-show="tabsShown()">
+  <label ng-repeat="tab in tabList" class="bubble-tab{{tab.enabled ? ' active' : ''}}">{{tab.value}}</label>
+<div>
+<div ng-transclude></div>

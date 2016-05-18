@@ -1,0 +1,42 @@
+div.command-field {
+  min-width: 100px;
+  max-width: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: 2px inset #E2E2E2;
+  min-height: 35px;
+  height: 35px;
+  background-color: #FFFFFF;
+  padding: 5px;
+  box-shadow: none;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+div.command-field.ui-focus {
+  border-radius: 5px !important;
+  border: 2px inset #E2E2E2 !important;
+  background-color: #FFFFFF;
+  outline: none;
+}
+div.command-field-validator{
+  position: relative;
+  float: right;
+  top: 0px;
+  width: 25px;
+  height: 25px;
+  /*border: 1px solid #E0E0E0;*/
+  background-color: transparent;
+  z-index: 1000;
+  margin-top: -38px;
+  margin-right: 5px;
+}
+div.command-field-validator.valid{
+  background-image: url('../images/success.png');
+  background-position: 0 0;
+  background-size: 25px 25px;
+}
+div.command-field-validator.invalid{
+  background-image: url('../images/deletered.png');
+  background-position: 0 0;
+  background-size: 25px 25px;
+}

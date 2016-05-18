@@ -1,0 +1,39 @@
+.bubble-selector {
+  min-width: 100px;
+  max-width: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  min-height: 25px;
+  background-color: transparent;
+  padding: 5px;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+.bubble-selector.ui-focus {
+  border-radius: 5px !important;
+  border: 1px solid #E2E2E2 !important;
+  outline: none;
+}
+.bubble-tab {
+  padding: 5px;
+  background-color: #F0F0F0;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px;
+  color: #999999;
+  font-weight: bold;
+  margin-right: 5px;
+  min-width: 15%;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  float: left;
+}
+.bubble-tab.active {
+  background-color: #d9edf7;
+  border-color: #E0E0E0;
+  color: #286090;
+}
+.bubble-tab:hover {
+  cursor: pointer;
+}
