@@ -39,10 +39,6 @@ angular.module('angularModernizrApp')
       $scope.insertText = function(text) {
         var value = this.$ctrl.fieldRef;
         var tokens = value.split(' ');
-        //.
-        // filter(function(token) {
-        //   return token.length > 0;
-        // });
         var htmlValue = '';
         for (var selector = 0; selector < tokens.length - 1; selector++) {
           htmlValue += (selector ? '&nbsp;' : '') + tokens[selector];
@@ -51,23 +47,7 @@ angular.module('angularModernizrApp')
           '&nbsp;';
         $scope.commandHtmlSelector.html(htmlValue);
         this.$ctrl.fieldRef = htmlValue.replace(/&nbsp;/g, ' ');
-        if (typeof this.$ctrl.syntaxFilterFunc === 'function' &&
-          typeof $scope.updateSyntaxList === 'function' &&
-          this.$ctrl.fieldRef.length > 0) {
-          var newList = this.$ctrl.syntaxFilterFunc.apply($scope.$parent)
-            .
-          call($scope.$parent, {
-            searchText: this.$ctrl.fieldRef
-          });
-          if (typeof newList === 'object' &&
-            typeof newList.filter === 'function') {
-            $scope.updateSyntaxList(newList);
-          }
-        }
-        if (!this.$ctrl.fieldRef.length) {
-          $scope.messageVisible = false;
-          $scope.emptyFieldStatus = true;
-        }
+        $scope.keyup();
       };
       $scope.validityClass = function() {
         $scope.elementValid = false;
@@ -93,12 +73,14 @@ angular.module('angularModernizrApp')
         }
       };
       $scope.keyup = function(event) {
-        if (event.keyCode === 13) {
-          event.preventDefault();
-          return;
+        if (event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            return;
+          }
+          this.$ctrl.fieldRef = $(event.target).html().replace(
+            /&nbsp;/g, ' ');
         }
-        this.$ctrl.fieldRef = $(event.target).html().replace(
-          /&nbsp;/g, ' ');
         if (typeof this.$ctrl.syntaxFilterFunc === 'function' &&
           typeof $scope.updateSyntaxList === 'function' &&
           this.$ctrl.fieldRef.length > 0) {
