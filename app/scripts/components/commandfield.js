@@ -32,7 +32,7 @@ angular.module('angularModernizrApp')
         $(event.target).removeClass('ui-focus');
       };
       $scope.insertText = function(text) {
-        var value = this.$ctrl.fieldRef;
+        var value = this.$ctrl.fieldRef.trim();
         var tokens = value.split(' ').
         filter(function(token) {
           return token.length > 0;
@@ -41,7 +41,7 @@ angular.module('angularModernizrApp')
         for (var selector = 0; selector < tokens.length - 1; selector++) {
           htmlValue += (selector ? '&nbsp;' : '') + tokens[selector];
         }
-        htmlValue += '&nbsp;' + text;
+        htmlValue += '&nbsp;' + text + '&nbsp;';
         $scope.commandHtmlSelector.html(htmlValue);
         this.$ctrl.fieldRef = htmlValue.replace('nbsp;', ' ');
       };
@@ -50,7 +50,7 @@ angular.module('angularModernizrApp')
           if (this.$ctrl.fieldRef.length > 0) {
             var status = this.$ctrl.syntaxValidatorFunc.apply($scope.$parent)
               .call($scope.$parent, {
-                value: this.$ctrl.fieldRef.trim()
+                value: this.$ctrl.fieldRef
               });
             return ' ' + (status ? 'valid' : 'invalid');
           }
@@ -69,7 +69,7 @@ angular.module('angularModernizrApp')
           return;
         }
         this.$ctrl.fieldRef = $(event.target).html().trim().replace(
-          '&nbsp;', ' ').trim();
+          '&nbsp;', ' ');
         if (typeof this.$ctrl.syntaxFilterFunc === 'function' &&
           typeof $scope.updateSyntaxList === 'function' &&
           this.$ctrl.fieldRef.length > 0) {
