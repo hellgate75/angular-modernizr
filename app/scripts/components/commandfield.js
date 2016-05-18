@@ -23,23 +23,27 @@ angular.module('angularModernizrApp')
           '<link id="commandfield" href="styles/commandfield.css" rel="stylesheet">'
         );
       }
-      this.$onInit = function() {
-        //this.tabsCtrl.addPane(this);
-        //console.log(this);
-      };
+      this.$onInit = function() {};
       $scope.focus = function(event) {
-        console.log('focus : ' + event);
         $(event.target).addClass('ui-focus');
+        $scope.commandHtmlSelector = $(event.target);
       };
       $scope.blur = function(event) {
-        console.log('blur : ' + event);
         $(event.target).removeClass('ui-focus');
       };
-      $scope.keypress = function(event) {
-        if (event.keyCode === 13) {
-          event.preventDefault();
-          return;
+      $scope.insertText = function(text) {
+        var value = this.$ctrl.fieldRef;
+        var tokens = value.split(' ').
+        filter(function(token) {
+          return token.length > 0;
+        });
+        var htmlValue = '';
+        for (var selector = 0; selector < tokens.length - 1; selector++) {
+          htmlValue += (selector ? '&nbsp;' : '') + tokens[selector];
         }
+        htmlValue += '&nbsp;' + text;
+        $scope.commandHtmlSelector.html(htmlValue);
+        this.$ctrl.fieldRef = htmlValue.replace('nbsp;', ' ');
       };
       $scope.validityClass = function() {
         if (typeof this.$ctrl.syntaxValidatorFunc === 'function') {
@@ -53,16 +57,22 @@ angular.module('angularModernizrApp')
         }
         return '';
       };
+      $scope.keypress = function(event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          return;
+        }
+      };
       $scope.keyup = function(event) {
-        console.log('keypress : ' + event);
         if (event.keyCode === 13) {
           event.preventDefault();
           return;
         }
         this.$ctrl.fieldRef = $(event.target).html().trim().replace(
-          '&nbsp;', ' ');
+          '&nbsp;', ' ').trim();
         if (typeof this.$ctrl.syntaxFilterFunc === 'function' &&
-          typeof $scope.updateSyntaxList === 'function') {
+          typeof $scope.updateSyntaxList === 'function' &&
+          this.$ctrl.fieldRef.length > 0) {
           var newList = this.$ctrl.syntaxFilterFunc.apply($scope.$parent)
             .
           call($scope.$parent, {
@@ -72,6 +82,10 @@ angular.module('angularModernizrApp')
             typeof newList.filter === 'function') {
             $scope.updateSyntaxList(newList);
           }
+        }
+        if (this.$ctrl.fieldRef.length === 0 &&
+          typeof $scope.updateSyntaxList === 'function') {
+          $scope.updateSyntaxList([]);
         }
       };
     }]

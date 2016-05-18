@@ -178,27 +178,13 @@ angular.module('angularModernizrApp')
     $scope.searchMatching = function(listOfPrime, tokens) {
       if (tokens.length > 0) {
         var results = listOfPrime.filter(function(parent) {
-          if (parent.elem === tokens[0]) {
-            console.log('LOOKUP = name : ' + parent.elem +
-              ' children : ' +
-              JSON.stringify(parent.children) + ' needChild : ' +
-              parent.needChild + ' tokens : ' + tokens.length);
-          }
           return parent.elem === tokens[0] && (tokens.length > 1 || !
             parent.needChild);
         });
         var nextTokens = tokens.splice(1, tokens.length);
-        console.log('next tokens : ' + nextTokens);
-        console.log('results : ' + results.length);
         if (!!results.length) {
           var found = false;
           results.forEach(function(parent) {
-            console.log('CHECK = name : ' + parent.elem +
-              ' children : ' +
-              JSON.stringify(parent.children) + ' (' + parent.children
-              .length +
-              ') needChild : ' +
-              parent.needChild + ' tokens : ' + tokens.length);
             if (((nextTokens.length > 0 && !parent.children.length) ||
                 !
                 parent.needChild) && (parent.allowChild || !
