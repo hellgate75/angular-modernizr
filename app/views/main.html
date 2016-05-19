@@ -21,8 +21,9 @@
   </div>
 
     <h3>Syntax-Command Field</h3>
+    <!-- <button class="ng-exec-button" ng-disabled="disableExecution" onclick="event.preventDefault(); return false;">EXEC</button> -->
     <div class="well">
-      <command-field syntax-filter-func="filterSyntaxSuggestions" syntax-validator-func="validateSyntax" field-ref="syntaxInputValue" empty-field-message="Insert any text in the box ..." incomplete-field-message="Insert other text to validate the field!!">
+      <command-field syntax-filter-func="filterSyntaxSuggestions" syntax-validator-func="validateSyntax" field-ref="ctrl.syntaxInputValue" empty-field-message="Insert any text or correct text in the box ..." incomplete-field-message="Insert other text to validate the field!!">
           <bubble-selector></bubble-selector>
         </command-field>
     </div>

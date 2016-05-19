@@ -11,6 +11,7 @@ angular.module('angularModernizrApp')
   .controller('MainCtrl', ['$scope', function($scope) {
     $scope.inputValue = '';
     $scope.syntaxInputValue = '';
+    this.syntaxInputValue = '';
     $scope.listOfSysntax = [{
       elem: 'bind',
       needChild: true,
@@ -272,6 +273,21 @@ angular.module('angularModernizrApp')
       });
       return elements;
     };
+    // $scope.disableExecution = true;
+    // $scope.$watch($scope.syntaxInputValue, function() {
+    //   console.log('syntaxInputValue : >' + $scope.syntaxInputValue +
+    //     '<');
+    //   $scope.disableExecution = !$scope.syntaxInputValue.length || !
+    //     $scope
+    //     .validateSyntax($scope.syntaxInputValue);
+    // });
+    // $scope.$watch(this.syntaxInputValue, function() {
+    //   console.log('syntaxInputValue : >' + this.syntaxInputValue +
+    //     '<');
+    //   $scope.disableExecution = !this.syntaxInputValue.length || !
+    //     $scope
+    //     .validateSyntax(this.syntaxInputValue);
+    // }.bind(this));
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

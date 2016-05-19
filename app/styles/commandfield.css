@@ -15,7 +15,7 @@ div.command-field {
 div.command-field.ui-focus {
   border-radius: 5px !important;
   border: 2px inset #E2E2E2 !important;
-  background-color: #FFFFFF;
+  background-color: #FFFFFF !important;
   outline: none;
 }
 div.command-field-validator{

@@ -95,3 +95,11 @@ body {
     border-bottom: 0;
   }
 }
+.ng-exec-button {
+  position: relative;
+  float: right;
+  margin-top: -25px;
+}
+.ng-exec-button:disabled {
+  opacity: 0.6;
+}
