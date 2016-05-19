@@ -1,0 +1,7 @@
+.widget-accordion  .panel-heading .panel-title A {
+  width: 100%;
+  display: inline-flex;
+  text-decoration: initial;
+  color: #A28686;
+  outline: none;
+}

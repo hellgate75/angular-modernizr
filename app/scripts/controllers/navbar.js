@@ -14,14 +14,29 @@ angular.module('angularModernizrApp').controller(
     function($scope) {
       $scope.aboutClass = '';
       $scope.mainClass = 'active';
+      $scope.widgetsClass = '';
       $scope.contactsClass = '';
       $scope.switchToMain = function() {
         $scope.aboutClass = '';
+        $scope.widgetsClass = '';
         $scope.mainClass = 'active';
+      };
+      $scope.switchToWidgets = function() {
+        $scope.aboutClass = '';
+        $scope.widgetsClass = 'active';
+        $scope.mainClass = '';
       };
       $scope.switchToAbout = function() {
         $scope.aboutClass = 'active';
+        $scope.widgetsClass = '';
         $scope.mainClass = '';
       };
+      // console.log(window.location.href);
+      if (window.location.href.indexOf('/widgets')>0) {
+        $scope.switchToWidgets();
+      }
+      if (window.location.href.indexOf('/about')>0) {
+        $scope.switchToAbout();
+      }
     }
   ]);

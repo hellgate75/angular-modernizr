@@ -1,0 +1,20 @@
+.ng-scope.ng-widget, .ng-scope.ng-widget .ng-type-key, .ng-scope.ng-widget .ng-type-value, .ng-scope.ng-widget .ng-type-value-edit, .ng-scope.ng-widget .ng-content {
+  overflow: hidden;
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  float: left;
+}
+.ng-scope.ng-widget .ng-type-key {
+  color: #A28686;
+  margin-top:5px;
+  margin-bottom:5px;
+}
+.ng-scope.ng-widget .ng-type-value {
+  color: #000000;
+  margin-bottom:15px;
+}
+.ng-scope.ng-widget .ng-type-value-edit {
+  color: #000000;
+  margin-bottom:15px;
+}

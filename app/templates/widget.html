@@ -1,0 +1,6 @@
+<div id="{{widgetId()}}" class="ng-widget keyValuePair" ng-if="visible()">
+<div class="ng-type-key">{{$ctrl.options.key}}</div>
+<div class="ng-type-value" ng-if="isReadOnlyMode()" ng-blur="validate($event)">{{$ctrl.options.value}}</div>
+<div class="ng-type-value-edit" ng-if="isEditMode()"><input type="{{$ctrl.options.type}}"  ng-model="$ctrl.options.value"></input></div>
+<div class="ng-content" ng-transclude></div>
+</div>

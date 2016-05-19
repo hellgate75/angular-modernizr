@@ -1,0 +1,15 @@
+.ng-scope.ng-widget.keyValuePair {
+}
+.ng-scope.ng-widget.keyValuePair .ng-type-value-edit-custom {
+}
+.ng-scope.ng-widget.keyValuePair .ng-type-boolean {
+}
+.ng-scope.ng-widget.keyValuePair .ng-type-boolean.on {
+}
+.ng-scope.ng-widget.keyValuePair .ng-type-boolean.off {
+}
+.ng-scope.ng-widget .ng-type-value-edit input {
+    width: 100%;
+    border-radius: 5px;
+    color: #544D4D;
+}

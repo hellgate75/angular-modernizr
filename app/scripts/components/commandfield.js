@@ -62,7 +62,7 @@ angular.module('angularModernizrApp')
                 $scope.syntaxColorList.length ? index : $scope.syntaxColorList
                 .length - 1] + ';">' + token + '</span>';
           });
-          htmlValue += endsWithSpaces.replace(/ /g, '&nbsp;');;
+          htmlValue += endsWithSpaces.replace(/ /g, '&nbsp;');
         }
         htmlValue = htmlValue;
         $scope.commandHtmlSelector.html(htmlValue);

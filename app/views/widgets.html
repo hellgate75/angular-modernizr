@@ -1,0 +1,26 @@
+<div ng-controller"WidgetsCtrl as widgetCtrl">
+  <p><h2>Widget Example</h2></p>
+  <br/>
+  <br/>
+  <button ng-click="toggleState()">{{stateChangeText}}</button>
+  <br/>
+  <br/>
+  <p>Single Text Editable Field</p>
+  <key-value-pair options="singleStringField"></key-value-pair>
+  <br/>
+  <br/>
+  <p>Single Read Only Text Editable Field</p>
+  <key-value-pair options="singleROStringField"></key-value-pair>
+  <br/>
+  <br/>
+  <p>Accordion Collapse with Editable text field</p>
+  <widget-accordion options="accordion1">
+    <key-value-pair options="singleAccordionStringField1"></key-value-pair>
+  </widget-accordion>
+  <br/>
+  <br/>
+  <p>Accordion Expanded with ReadOnly text field</p>
+  <widget-accordion options="accordion2">
+    <key-value-pair options="singleAccordionStringField2"></key-value-pair>
+  </widget-accordion>
+</div>

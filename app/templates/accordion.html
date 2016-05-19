@@ -1,0 +1,8 @@
+<div id="{{widgetId()}}" class="ng-widget widget-accordion" ng-if="visible()">
+  <uib-accordion close-others="{{widgetId()}}Accordion">
+    <uib-accordion-group heading="{{$ctrl.options.title}}" is-open="$ctrl.options.expanded">
+      <div class="ng-content" ng-transclude></div>
+    </uib-accordion-group>
+</uib-accordion>
+        <!-- <div class="ng-type-key ng-accordion-title"><span class="ng-accordion-selector"></span>{{$ctrl.options.title}}</div> -->
+</div>

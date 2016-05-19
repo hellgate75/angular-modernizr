@@ -39,6 +39,7 @@ module.exports = function(config) {
       'bower_components/angular-modular-modernizr/sources/ModernizrConstant.constant.js',
       'bower_components/modal/javascripts/jquery.modal.js',
       'bower_components/angular-fontawesome/dist/angular-fontawesome.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
