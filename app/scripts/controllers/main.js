@@ -16,19 +16,23 @@ angular.module('angularModernizrApp')
       elem: 'bind',
       needChild: true,
       allowChild: true,
+      allowedChildren: 0,
       children: [{
         elem: 'into',
         needChild: true,
         allowChild: true,
+        allowedChildren: 0,
         children: [{
           elem: 'network',
           needChild: true,
           allowChild: true,
+          allowedChildren: 1,
           children: []
         }, {
           elem: 'sub-network',
           needChild: true,
           allowChild: true,
+          allowedChildren: 1,
           children: []
         }]
       }, {
@@ -38,31 +42,37 @@ angular.module('angularModernizrApp')
           elem: 'network',
           needChild: true,
           allowChild: true,
+          allowedChildren: 1,
           children: []
         }, {
           elem: 'sub-network',
           needChild: true,
           allowChild: true,
+          allowedChildren: 1,
           children: []
         }, {
           elem: 'root',
           needChild: false,
           allowChild: false,
+          allowedChildren: 0,
           children: []
         }]
       }, {
         elem: 'all',
         needChild: true,
         allowChild: true,
+        allowedChildren: 0,
         children: [{
           elem: 'on',
           needChild: true,
           allowChild: true,
+          allowedChildren: 1,
           children: []
         }, {
           elem: 'for',
           needChild: true,
           allowChild: true,
+          allowedChildren: 1,
           children: []
         }]
       }]
@@ -70,34 +80,47 @@ angular.module('angularModernizrApp')
       elem: 'bind-all',
       needChild: true,
       allowChild: true,
+      allowedChildren: 0,
       children: [{
         elem: 'as',
         needChild: true,
         allowChild: true,
+        allowedChildren: 0,
         children: [{
           elem: 'network',
           needChild: true,
           allowChild: true,
+          allowedChildren: 1,
           children: []
         }, {
           elem: 'sub-network',
           needChild: true,
           allowChild: true,
+          allowedChildren: 1,
           children: []
         }, {
           elem: 'network-element',
           needChild: true,
           allowChild: true,
+          allowedChildren: 1,
           children: []
         }, {
           elem: 'network-element',
           needChild: true,
           allowChild: true,
+          allowedChildren: 1,
           children: []
         }, {
           elem: 'mo-object',
           needChild: true,
           allowChild: true,
+          allowedChildren: 1,
+          children: []
+        }, {
+          elem: 'fnd',
+          needChild: true,
+          allowChild: true,
+          allowedChildren: 0,
           children: []
         }]
       }]
@@ -190,7 +213,11 @@ angular.module('angularModernizrApp')
                 !
                 parent.needChild) && (parent.allowChild || !
                 nextTokens.length)) {
-              found = true;
+              if (parent.children.length || (!parent.allowChild ||
+                  (!parent.allowedChildren || nextTokens.length <=
+                    parent.allowedChildren))) {
+                found = true;
+              }
             } else {
               var matchRes = $scope.searchMatching(parent.children,
                 nextTokens);
