@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Component: container', function() {
+describe('Component: widgetContainer', function() {
 
   // load the directive's module
   beforeEach(module('angularModernizrApp'));
@@ -13,7 +13,7 @@ describe('Component: container', function() {
   }));
 
   it('should make hidden element visible', inject(function(/*$compile*/) {
-    // element = angular.element('<container></container>');
+    // element = angular.element('<widget-container></widget-container>');
     // element = $compile(element)(scope);
     // expect(element.text()).toBe('this is the container directive');
   }));

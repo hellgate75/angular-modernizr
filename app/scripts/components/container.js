@@ -2,14 +2,15 @@
 
 /**
  * @ngdoc directive
- * @name angularModernizrApp.directive:container
+ * @name angularModernizrApp.directive:container,
  * @description
  * # container
  */
 angular.module('angularModernizrApp')
-  .component('container', {
+  .component('widgetContainer', {
     templateUrl: 'templates/container.html',
     transclude: true,
+    requires: ['^^widget', '^^keyValuePair', '^^widgetAcordion'],
     restrict: 'E',
     bindings: {
       options: '<'
@@ -28,12 +29,14 @@ angular.module('angularModernizrApp')
       }
       var $widgetParent = $scope && $scope.$parent ? $scope.$parent :
         undefined;
-        if ($widgetParent && typeof $widgetParent.registerWidget === 'function') {
-          $widgetParent = $scope && $scope.$parent  && $scope.$parent.$parent ? $scope.$parent.$parent :
-          undefined;
-        }
       /* Component Init function*/
       this.$onInit = function() {
+        while($scope.$parent && $widgetParent && typeof $widgetParent.registerWidget !== 'function') {
+          if ($widgetParent && typeof $widgetParent.registerWidget === 'function') {
+            $widgetParent = $scope && $scope.$parent  && $scope.$parent.$parent ? $scope.$parent.$parent :
+            undefined;
+          }
+        }
         if ($widgetParent && typeof $widgetParent.registerWidget === 'function') {
           $widgetParent.registerWidget($scope);
         }
@@ -41,25 +44,17 @@ angular.module('angularModernizrApp')
       /* Scoped functions*/
       $scope.widgetVisible = true;
       $scope.readOnlyState = true;
-      $scope.isReadOnlyMode = function() {
-        return this.$ctrl.options.readOnly || $scope.readOnlyState;
-      };
-      $scope.isEditMode = function() {
-        return !this.$ctrl.options.readOnly && !$scope.readOnlyState;
-      };
       $scope.visible = function() {
         return $scope.widgetVisible;
       };
       $scope.widgetId= function() {
-        var parentId;
-        if ($widgetParent && typeof $widgetParent.widgetId === 'function') {
-          parentId = $widgetParent.widgetId();
-        }
-        return (parentId ? parentId + '_' : '') + $scope.$ctrl.options.key;
+        return (this.parentId ? this.parentId + '_' : '') + $scope.$ctrl.options.key;
       };
       $scope.widgetsCollection = [];
       $scope.registerWidget = function(widget) {
         if (widget) {
+          widget.parentId=$scope.widgetId();
+          $scope.$parent=$scope;
           $scope.widgetsCollection.push(widget);
           if (widget && widget.$ctrl && typeof widget.$ctrl.onViewReady === 'function') {
             widget.$ctrl.onViewReady();
@@ -81,33 +76,71 @@ angular.module('angularModernizrApp')
       };
       /* Controller functions*/
       this.getValue = function() {
-        var key = this.$ctrl.options.key;
-        var value = this.$ctrl.options.value;
-        var type = this.$ctrl.options.type;
+        var value=[];
+        $scope.widgetsCollection.forEach(function(widget) {
+          if (widget && typeof widget.getValue === 'function') {
+            value.push(widget.getValue());
+          }
+        });
+        var key = this.options.key;
         return {
           key: key,
           value: value,
-          type: type
+          type: 'widet'
         };
       };
       this.setValue = function(value) {
-        this.$ctrl.key = value.key;
-        this.$ctrl.value = value.value;
-        this.$ctrl.type = value.type;
+        if (value && value.type === 'widget' && typeof value.forEach === 'function') {
+          value.forEach(function(aValue) {
+            if (typeof aValue.key !== 'undefined') {
+              var aWidget = $scope.widgetsCollection.filter(function(anyWidget) {
+                return anyWidget.$ctrl && anyWidget.$ctrl.options && anyWidget.$ctrl.options.key === aValue.key;
+              })[0];
+              if (aWidget && typeof aWidget.setValue === 'function') {
+                aWidget.setValue(aValue);
+              }
+            }
+          });
+        }
       };
       this.onViewReady = function() {
+        $scope.widgetsCollection.forEach(function(widget) {
+          if (widget && typeof widget.onViewReady === 'function') {
+            widget.onViewReady();
+          }
+        });
       };
       this.onReadModeView = function() {
         $scope.readOnlyState = true;
+        $scope.widgetsCollection.forEach(function(widget) {
+          if (widget && typeof widget.onReadModeView === 'function') {
+            widget.onReadModeView();
+          }
+        });
       };
       this.onEditModeView = function() {
         $scope.readOnlyState = false;
+        $scope.widgetsCollection.forEach(function(widget) {
+          if (widget && typeof widget.onEditModeView === 'function') {
+            widget.onEditModeView();
+          }
+        });
       };
       this.show = function() {
         $scope.widgetVisible = true;
+        $scope.widgetsCollection.forEach(function(widget) {
+          if (widget && typeof widget.show === 'function') {
+            widget.show();
+          }
+        });
       };
       this.hide = function() {
         $scope.widgetVisible = false;
+        $scope.widgetsCollection.forEach(function(widget) {
+          if (widget && typeof widget.hide === 'function') {
+            widget.hide();
+          }
+        });
       };
     }]
   });

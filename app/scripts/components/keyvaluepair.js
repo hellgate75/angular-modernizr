@@ -29,12 +29,14 @@ angular.module('angularModernizrApp')
       }
       var $widgetParent = $scope && $scope.$parent ? $scope.$parent :
         undefined;
-        if ($widgetParent && typeof $widgetParent.registerWidget === 'function') {
-          $widgetParent = $scope && $scope.$parent  && $scope.$parent.$parent ? $scope.$parent.$parent :
-          undefined;
-        }
       /* Component Init function*/
       this.$onInit = function() {
+        while($scope.$parent && $widgetParent && typeof $widgetParent.registerWidget !== 'function') {
+          if ($widgetParent && typeof $widgetParent.registerWidget === 'function') {
+            $widgetParent = $scope && $scope.$parent  && $scope.$parent.$parent ? $scope.$parent.$parent :
+            undefined;
+          }
+        }
         if ($widgetParent && typeof $widgetParent.registerWidget === 'function') {
           $widgetParent.registerWidget($scope);
         }
@@ -76,11 +78,7 @@ angular.module('angularModernizrApp')
       $scope.validate = function(/*event*/) {
       };
       $scope.widgetId= function() {
-        var parentId;
-        if ($widgetParent && typeof $widgetParent.widgetId === 'function') {
-          parentId = $widgetParent.widgetId();
-        }
-        return (parentId ? parentId + '_' : '') + $scope.$ctrl.options.key;
+        return (this.parentId ? this.parentId + '_' : '') + $scope.$ctrl.options.key;
       };
       $scope.attachTo = function(domElement) {
         if (domElement) {
@@ -97,9 +95,9 @@ angular.module('angularModernizrApp')
       };
       /* Controller functions*/
       this.getValue = function() {
-        var key = this.$ctrl.options.key;
-        var value = this.$ctrl.options.value;
-        var type = this.$ctrl.options.type;
+        var key = this.options.key;
+        var value = this.options.value;
+        var type = this.options.type;
         return {
           key: key,
           value: value,
@@ -107,9 +105,9 @@ angular.module('angularModernizrApp')
         };
       };
       this.setValue = function(value) {
-        this.$ctrl.key = value.key;
-        this.$ctrl.value = value.value;
-        this.$ctrl.type = value.type;
+        this.options.key = value.key;
+        this.options.value = value.value;
+        this.options.type = value.type;
       };
       this.onViewReady = function() {
       };
