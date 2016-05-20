@@ -3,6 +3,7 @@
   "private": true,
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
+    "customizr": "^1.0.0-alpha",
     "grunt": "^0.4.5",
     "grunt-angular-templates": "^0.5.7",
     "grunt-concurrent": "^1.0.0",
@@ -35,6 +36,7 @@
     "karma": "^0.13.22",
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.0",
+    "modernizr": "^3.3.1",
     "phantomjs-prebuilt": "^2.1.7",
     "time-grunt": "^1.0.0"
   },

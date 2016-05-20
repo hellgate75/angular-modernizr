@@ -18,3 +18,8 @@
   color: #000000;
   margin-bottom:15px;
 }
+.ng-scope.ng-widget {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}

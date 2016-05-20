@@ -24,6 +24,35 @@ module.exports = function(grunt) {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
+  grunt.loadNpmTasks('grunt-modernizr');
+  var modernizr = require('customizr');
+
+  var settings = {
+      cache : true,
+      devFile : false,
+      dest : false,
+      options : [
+          'setClasses',
+          'addTest',
+          'html5printshiv',
+          'testProp',
+          'fnBind'
+      ],
+      uglify : true,
+      tests : [],
+      excludeTests: [],
+      crawl : true,
+      useBuffers: false,
+      files : {
+          src: [
+              '*[^(g|G)runt(file)?].{js,css,scss}',
+              '**[^node_modules]/**/*.{js,css,scss}',
+              '!lib/**/*'
+          ]
+      },
+      customTests : []
+  };
+  modernizr(settings, function () {});
 
   // Define the configuration for all the tasks
   grunt.initConfig({
