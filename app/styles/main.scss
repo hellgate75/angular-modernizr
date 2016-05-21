@@ -103,3 +103,17 @@ body {
 .ng-exec-button:disabled {
   opacity: 0.6;
 }
+.marketing input {
+  min-width: 100px;
+  max-width: 80%;
+  width: 80%;
+  border-radius: 5px;
+  border: 2px inset #E2E2E2;
+  min-height: 35px;
+  height: 35px;
+  background-color: #FFFFFF;
+  padding: 5px;
+  box-shadow: none;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
