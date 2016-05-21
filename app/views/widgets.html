@@ -6,10 +6,10 @@
 <div ng-controller="WidgetsCtrl as widgetCtrl">
   <form name="widgetsForm">
     <widget-container options="mainContainer">
-      <button class="btn btn-secondary" ng-click="toggleState()" ng-if="!editMode" title="Go to edit mode">{{stateChangeText}}</button>
-      <button class="btn btn-primary" ng-click="reload()" ng-if="!editMode" title="Reset the orginal values">Reset</button>
-      <button class="btn btn-secondary" ng-click="toggleState()" ng-if="editMode" title="Go to view mode">Cancel</button>
-      <button class="btn btn-primary" ng-click="saveForm()" ng-if="editMode" title="Save the form data (Not persistent in test environment)">Save</button>
+      <button class="btn btn-secondary" ng-click="toggleState()" ng-if="!editMode" title="Go to edit mode" ng-disabled="!containsWidgets()">{{stateChangeText}}</button>
+      <button class="btn btn-primary" ng-click="reload()" ng-if="!editMode" title="Reset the orginal values" ng-disabled="!containsWidgets()">Reset</button>
+      <button class="btn btn-secondary" ng-click="toggleState()" ng-if="editMode" title="Go to view mode" ng-disabled="!containsWidgets()">Cancel</button>
+      <button class="btn btn-primary" ng-click="saveForm()" ng-if="editMode" title="Save the form data (Not persistent in test environment)" ng-disabled="!containsWidgets()">Save</button>
       <br/>
       <br/>
       <p>Single Text Editable Field</p>

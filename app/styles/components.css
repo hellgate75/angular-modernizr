@@ -23,3 +23,6 @@
      -moz-box-sizing: content-box;
           box-sizing: content-box;
 }
+.btn, .btn:focus {
+  outline: none;
+}

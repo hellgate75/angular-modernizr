@@ -36,7 +36,14 @@ module.exports = function(grunt) {
           'addTest',
           'html5printshiv',
           'testProp',
-          'fnBind'
+          'fnBind',
+          'createElement',
+          'cssToDOM',
+          'hasEvent',
+          'injectElementWithStyles',
+          'toStringFn',
+          'docElement',
+          'domToCss'
       ],
       uglify : true,
       tests : [],

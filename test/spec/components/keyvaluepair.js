@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Component: keyValuePair', function() {
+describe('Directive: keyValuePair', function() {
 
   // load the directive's module
   beforeEach(module('angularModernizrApp'));

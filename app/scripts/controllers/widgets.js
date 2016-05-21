@@ -37,23 +37,34 @@ angular.module('angularModernizrApp')
     $scope.accordion1 = {
       key: 'ngInAccordion1',
       title: 'Accordion 1 - Collapsed',
-      expanded: false
+      expanded: false,
+      type: 'accordion',
+      value: [$scope.singleAccordionStringField1]
     };
     $scope.accordion2 = {
       key: 'ngInAccordion2',
       title: 'Accordion 2 - Expanded',
-      expanded: true
+      expanded: true,
+      type: 'accordion',
+      value: [$scope.singleAccordionStringField2]
     };
     $scope.mainContainer = {
-      key: 'mainContainer'
+      key: 'mainContainer',
+      type: 'container',
+      value: [$scope.singleStringField, $scope.singleROStringField, $scope.accordion1, $scope.accordion2]
     };
-    $scope.allOptions = [$scope.mainContainer, $scope.singleStringField, $scope.singleROStringField, $scope.singleAccordionStringField1, $scope.singleAccordionStringField2, $scope.accordion1, $scope.accordion2];
+    $scope.allOptions = [$scope.mainContainer];
     $scope.allOptionsBackup = JSON.parse(JSON.stringify($scope.allOptions));
     $scope.widgetId= function() {
       return undefined;
     };
-    $scope.widgetsCollection = [];
+    $scope.containsWidgets = function() {
+      return $scope.widgetsCollection && $scope.widgetsCollection.length>0;
+    };
     $scope.registerWidget = function(widget) {
+      if (!$scope.widgetsCollection) {
+        $scope.widgetsCollection = [];
+      }
       if (widget) {
         widget.parentId=$scope.widgetId();
         $scope.widgetsCollection.push(widget);
@@ -68,14 +79,23 @@ angular.module('angularModernizrApp')
     $scope.editMode=false;
     $scope.saved=false;
     $scope.stateChangeText = 'Edit Mode';
+    $scope.widgetCtrlId = '__main__';
+    $scope.mockValues = function(value) {
+      if (typeof value.value === 'string' && value.value.indexOf('SAVED: ')!==0) {
+        value.value = 'SAVED: ' + value.value;
+      }
+      else if (angular.isArray(value.value)) {
+        value.value.forEach(function(aValue) {
+          $scope.mockValues(aValue);
+        });
+      }
+    };
     $scope.saveForm = function() {
       $scope.saved=true;
       $scope.widgetsCollection.forEach(function(widget) {
         if (widget && widget.$ctrl && typeof widget.$ctrl.getValue === 'function' && typeof widget.$ctrl.setValue === 'function') {
           var value = widget.$ctrl.getValue();
-          if (typeof value.value === 'string' && value.value.indexOf('SAVED: ')!==0) {
-            value.value = 'SAVED: ' + value.value;
-          }
+          $scope.mockValues(value);
           widget.$ctrl.setValue(value);
         }
       });
@@ -84,7 +104,7 @@ angular.module('angularModernizrApp')
     $scope.reload = function() {
       $scope.widgetsCollection.forEach(function(widget) {
         if (widget && widget.$ctrl && typeof widget.$ctrl.getValue === 'function' && typeof widget.$ctrl.setValue === 'function') {
-          var value = $scope.allOptionsBackup.filter(function(aValue) { return aValue.key === widget.$ctrl.options.key && aValue.value;})[0];
+          var value = $scope.allOptionsBackup.filter(function(aValue) { return aValue.key === widget.options.key && aValue.value;})[0];
           if (value) {
             widget.$ctrl.setValue(value);
           }

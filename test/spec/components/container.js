@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Component: widgetContainer', function() {
+describe('Directive: widgetContainer', function() {
 
   // load the directive's module
   beforeEach(module('angularModernizrApp'));

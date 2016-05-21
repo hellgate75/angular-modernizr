@@ -1,7 +1,16 @@
 {
   "name": "angular-modernizr",
-  "version": "0.0.0",
-  "dependencies": {
+  "version": "0.0.1",
+    "homepage": "https://github.com/hellgate75/angular-modernizr",
+    "authors": [
+      "Fabrizio Torelli <hellgate75@gmail.com>"
+    ],
+    "description": "AngularJS based Modernizr service that expose some services.",
+    "keywords": [
+      "AngularJS",
+      "Modernizr"
+    ],
+    "dependencies": {
     "angular": "^1.5.5",
     "bootstrap-sass-official": "^3.2.0",
     "angular-animate": "^1.4.0",

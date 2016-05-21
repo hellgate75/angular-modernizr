@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Component: widgetAccordion', function() {
+describe('Directive: widgetAccordion', function() {
 
   // load the directive's module
   beforeEach(module('angularModernizrApp'));
