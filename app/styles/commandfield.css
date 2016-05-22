@@ -49,7 +49,6 @@ div.command-field-validator.invalid{
   color: #286090;
   font-weight: bold;
   font-family: Arial, Monospace;
-  padding-top: 10px;
 }
 .command-field-message-incomplete {
   min-width: 100px;
@@ -60,5 +59,4 @@ div.command-field-validator.invalid{
   color: red;
   font-weight: bold;
   font-family: Arial, Monospace;
-  padding-top: 10px;
 }
