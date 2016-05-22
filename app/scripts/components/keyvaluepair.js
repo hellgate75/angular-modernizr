@@ -7,7 +7,7 @@
  * # keyValuePair
  */
 angular.module('angularModernizrApp')
-  .directive('keyValuePair', function() {
+  .directive('keyValuePair', ['modernizrService', function(modernizrService) {
     return {
       templateUrl: 'templates/keyvaluepair.html',
       transclude: true,
@@ -63,9 +63,6 @@ angular.module('angularModernizrApp')
               }
           }
         };
-        $scope.visible = function() {
-          return $scope.widgetVisible;
-        };
         $scope.validate = function(/*event*/) {
         };
         $scope.widgetId= function() {
@@ -108,11 +105,43 @@ angular.module('angularModernizrApp')
         this.onEditModeView = function() {
           $scope.readOnlyState = false;
         };
-        this.show = function() {
+        /* Widget visibility control scope functions*/
+        $scope.show = function() {
           $scope.widgetVisible = true;
         };
-        this.hide = function() {
+        $scope.hide = function() {
           $scope.widgetVisible = false;
+        };
+        $scope.childrenWidgetCount = function() {
+          return 1;
+        };
+        /*
+        * The search and filter widgets by some parameters
+        * The hidden modified fields are changed the same way as the shown ones
+        * @Use (modernizrService)
+        * @(function)
+        * @(string) keyword - is the field you are filtering for as name of the options keyword
+        * @(string) value - is the value you are serching for into the field of named by the keyword
+        * @(integer) searchType - is the type of filter to apply :
+        *            0 - exact match in the keyword field
+        *            1 - starts with the value in the keyword field
+        *            2 - ends with the value in the keyword field
+        *            3 - contains the value in the keyword field
+        *            4 - does not exact match in the keyword field
+        *            5 - does not start with the value in the keyword field
+        *            6 - does not end with the value in the keyword field
+        *            7 - does not contain with the value in the keyword field
+        * @(boolean) caseSensitive - is the flag to search the text with or without caps sensitive
+        */
+        $scope.filter = function(keyword, value, searchType, caseSensitive) {
+          var foundLocalMatch = modernizrService.matchFilter($scope.options, keyword, value, searchType, caseSensitive);
+          if (!foundLocalMatch) {
+            $scope.hide();
+          }
+          else {
+            $scope.show();
+          }
+          return foundLocalMatch ? 1 : 0;
         };
       }],
       controllerAs: '$ctrl',
@@ -137,4 +166,4 @@ angular.module('angularModernizrApp')
         }
       }
     };
-  });
+  }]);

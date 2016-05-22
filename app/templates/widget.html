@@ -1,4 +1,4 @@
-<div id="{{widgetId()}}" class="ng-widget keyValuePair" ng-if="visible()">
+<div id="{{widgetId()}}" class="ng-widget keyValuePair" ng-if="widgetVisible">
 <div class="ng-type-key">{{options.key}}</div>
 <div class="ng-type-value" ng-if="isReadOnlyMode()" ng-blur="validate($event)">{{options.value}}</div>
 <div class="ng-type-value-edit" ng-if="isEditMode()"><input type="{{options.type}}"  ng-model="options.value"></input></div>

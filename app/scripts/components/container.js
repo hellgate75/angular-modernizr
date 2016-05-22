@@ -7,7 +7,7 @@
  * # container
  */
 angular.module('angularModernizrApp')
-  .directive('widgetContainer', function() {
+  .directive('widgetContainer', ['modernizrService', function(modernizrService) {
     return {
       templateUrl: 'templates/container.html',
       transclude: true,
@@ -34,9 +34,6 @@ angular.module('angularModernizrApp')
         /* Scoped functions*/
         $scope.widgetVisible = true;
         $scope.readOnlyState = true;
-        $scope.visible = function() {
-          return $scope.widgetVisible;
-        };
         $scope.widgetId= function() {
           return (this.parentId ? this.parentId + '_' : '') + $scope.options.key;
         };
@@ -115,21 +112,65 @@ angular.module('angularModernizrApp')
             }
           });
         };
-        this.show = function() {
+        /* Widget visibility control scope functions*/
+        $scope.show = function() {
           $scope.widgetVisible = true;
-          $scope.widgetsCollection.forEach(function(widget) {
-            if (widget && widget.$ctrl && typeof widget.$ctrl.show === 'function') {
-              widget.$ctrl.show();
-            }
-          });
         };
-        this.hide = function() {
+        $scope.hide = function() {
           $scope.widgetVisible = false;
+        };
+        /* Search scope functions*/
+        $scope.childrenWidgetCount = function() {
+          var childrenCount = 1;
           $scope.widgetsCollection.forEach(function(widget) {
-            if (widget && widget.$ctrl && typeof widget.$ctrl.hide === 'function') {
-              widget.$ctrl.hide();
+            if (typeof widget.childrenWidgetCount === 'function') {
+              childrenCount+=widget.childrenWidgetCount();
+            }
+            else {
+              childrenCount+=1;
             }
           });
+          return childrenCount;
+        };
+        /*
+        * The search and filter widgets by some parameters
+        * The hidden modified fields are changed the same way as the shown ones
+        * @Use (modernizrService)
+        * @(function)
+        * @(string) keyword - is the field you are filtering for as name of the options keyword
+        * @(string) value - is the value you are serching for into the field of named by the keyword
+        * @(integer) searchType - is the type of filter to apply :
+        *            0 - exact match in the keyword field
+        *            1 - starts with the value in the keyword field
+        *            2 - ends with the value in the keyword field
+        *            3 - contains the value in the keyword field
+        *            4 - does not exact match in the keyword field
+        *            5 - does not start with the value in the keyword field
+        *            6 - does not end with the value in the keyword field
+        *            7 - does not contain with the value in the keyword field
+        * @(boolean) caseSensitive - is the flag to search the text with or without caps sensitive
+        */
+        $scope.filter = function(keyword, value, searchType, caseSensitive) {
+          var filteredItems = 0;
+          var foundLocalMatch = modernizrService.matchFilter($scope.options, keyword, value, searchType, caseSensitive);
+          if (foundLocalMatch) {
+            filteredItems++;
+          }
+          $scope.widgetsCollection.forEach(function(widget) {
+              if (widget && typeof widget.filter === 'function') {
+                if (!widget.filter(keyword, value, searchType)) {
+                  filteredItems++;
+                }
+              }
+          });
+          var allObscured = (filteredItems===0);
+          if (allObscured && !foundLocalMatch) {
+            $scope.$ctrl.hide();
+          }
+          else {
+            $scope.$ctrl.show();
+          }
+          return filteredItems;
         };
       }],
       controllerAs: '$ctrl',
@@ -154,4 +195,4 @@ angular.module('angularModernizrApp')
         }
       }
     };
-  });
+  }]);

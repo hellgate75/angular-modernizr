@@ -1,0 +1,22 @@
+<div class="ng-search-box">
+<input class="search-field" type="text" data-ng-model="filterTextModel" ng-keyup="keyup($event)" ng-keypress="keypress($event)" placeholder="Type text to filter the form ..." autocomplete="off" autocorrect="off" autocapitalize="off">
+</input>
+<div id="attributeDropdown" class="btn-group" uib-dropdown>
+      <button id="btn-search-field-{{$id}}" type="button" class="btn btn-primary" uib-dropdown-toggle>
+        Select an attribute<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+        <li ng-repeat="attribute in attributeList" role="menuitem"><label ng-click="onAttributeChange(attribute.key)">{{attribute.value}}</label></li>
+      </ul>
+</div>
+<div id="searchTypeDropdown" class="btn-group" uib-dropdown>
+      <button id="btn-search-type-{{$id}}" type="button" class="btn btn-primary" uib-dropdown-toggle>
+        Select a search type<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+        <li ng-repeat="searchType in searchTypeList" role="menuitem"><label ng-click="onSearchTypeChange(searchType.key)">{{searchType.value}}</label></li>
+      </ul>
+</div>
+<div class="search-result-message" ng-if="showMessages()">Filtered {{filtered()}} of {{total()}}</div>
+<div ng-transclude></div>
+</div>

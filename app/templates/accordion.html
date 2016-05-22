@@ -1,4 +1,4 @@
-<div id="{{widgetId()}}" class="ng-widget widget-accordion" ng-if="visible()">
+<div id="{{widgetId()}}" class="ng-widget widget-accordion" ng-if="widgetVisible">
   <uib-accordion close-others="{{widgetId()}}Accordion">
     <uib-accordion-group heading="{{options.title}}" is-open="options.expanded">
       <div class="ng-content" ng-transclude></div>

@@ -1,9 +1,12 @@
 <div>
-  <p><h2>Widget Example</h2></p>
+  <p><h2>Widget Example (total widgets : {{calculateTotalWidgets()}})</h2></p>
   <br/>
   <br/>
 </div>
 <div ng-controller="WidgetsCtrl as widgetCtrl">
+  <search-box filter-function="filterWidgets" total-widgets="calculateTotalWidgets()" filtered-widgets="getFiltredWidgets()" filter-text-model="filterText"></search-box>
+  <br/>
+  <br/>
   <form name="widgetsForm">
     <widget-container options="mainContainer">
       <button class="btn btn-secondary" ng-click="toggleState()" ng-if="!editMode" title="Go to edit mode" ng-disabled="!containsWidgets()">{{stateChangeText}}</button>

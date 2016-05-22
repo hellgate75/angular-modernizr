@@ -1,0 +1,29 @@
+.ng-search-box .ng-type-value-edit {
+    width: 100%;
+    outline: none;
+    border: none;
+}
+.ng-search-box input {
+  min-width: 50px;
+  max-width: 50%;
+  width: 50%;
+  border-radius: 5px;
+  border: 2px inset #E2E2E2;
+  min-height: 35px;
+  height: 35px;
+  background-color: #FFFFFF;
+  padding: 5px;
+  box-shadow: none;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  outline: none;
+}
+.ng-search-box .btn-group {
+  min-width: 20px;
+  max-width: 20%;
+  width: 20%;
+  margin-left: 10px;
+}
+.ng-search-box .btn-group button {
+  min-width: 20px;
+}

@@ -11,38 +11,38 @@ angular.module('angularModernizrApp')
   .controller('WidgetsCtrl', [ '$scope',
   function($scope) {
     $scope.singleStringField = {
-      key: 'ngStringAttrbute',
+      key: 'ngStringAttirbute',
       value: 'my editable text',
       type: 'text',
       readOnly: false
     };
     $scope.singleROStringField = {
-      key: 'ngReadOnlyStringAttrbute',
+      key: 'ngReadOnlyStringAttribute',
       value: 'my readonly text',
       type: 'text',
       readOnly: true
     };
     $scope.singleAccordionStringField1 = {
-      key: 'ngInAccordionStringAttrbute',
+      key: 'ngInAccordionStringAttribute',
       value: 'my editable in accordion text',
       type: 'text',
       readOnly: false
     };
     $scope.singleAccordionStringField2 = {
-      key: 'ngInAccordionStringAttrbute2',
+      key: 'ngInAccordionStringAttribute2',
       value: 'my readonly in accordion text',
       type: 'text',
       readOnly: true
     };
     $scope.accordion1 = {
-      key: 'ngInAccordion1',
+      key: 'ngAccordionContainer1',
       title: 'Accordion 1 - Collapsed',
       expanded: false,
       type: 'accordion',
       value: [$scope.singleAccordionStringField1]
     };
     $scope.accordion2 = {
-      key: 'ngInAccordion2',
+      key: 'ngInAccordionContainer2',
       title: 'Accordion 2 - Expanded',
       expanded: true,
       type: 'accordion',
@@ -61,6 +61,7 @@ angular.module('angularModernizrApp')
     $scope.containsWidgets = function() {
       return $scope.widgetsCollection && $scope.widgetsCollection.length>0;
     };
+    $scope.filterText = '';
     $scope.registerWidget = function(widget) {
       if (!$scope.widgetsCollection) {
         $scope.widgetsCollection = [];
@@ -80,6 +81,20 @@ angular.module('angularModernizrApp')
     $scope.saved=false;
     $scope.stateChangeText = 'Edit Mode';
     $scope.widgetCtrlId = '__main__';
+    $scope.calculateTotalWidgets = function() {
+      var totalWidgets = 0;
+      if ($scope.widgetsCollection && angular.isArray($scope.widgetsCollection)) {
+        $scope.widgetsCollection.forEach(function(widget) {
+          totalWidgets += widget.childrenWidgetCount();
+        });
+      }
+      return totalWidgets;
+    };
+
+    $scope.getFiltredWidgets = function() {
+      return $scope.filteredWidgets;
+    };
+
     $scope.mockValues = function(value) {
       if (typeof value.value === 'string' && value.value.indexOf('SAVED: ')!==0) {
         value.value = 'SAVED: ' + value.value;
@@ -110,6 +125,8 @@ angular.module('angularModernizrApp')
           }
         }
       });
+      $scope.filterText = '';
+      $scope.filteredWidgets = 0;
     };
     $scope.toggleState = function() {
       $scope.editMode = !$scope.editMode;
@@ -129,6 +146,15 @@ angular.module('angularModernizrApp')
           }
         });
       }
+    };
+    $scope.filteredWidgets = 0;
+    $scope.filterWidgets = function(request) {
+      console.log('Searching for request : "'+JSON.stringify(request)+'"');
+      $scope.widgetsCollection.forEach(function(widget) {
+        if (widget) {
+          widget.filter(request.keyword, request.value, request.type, request.caseSensitive);
+        }
+      });
     };
     this.awesomeThings = [
       'HTML5 Boilerplate',
