@@ -19,6 +19,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap',
+    'ui.bootstrap.modal',
     'picardy.fontawesome'
   ])
   .config(function($routeProvider) {

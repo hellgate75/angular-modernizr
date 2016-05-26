@@ -15,7 +15,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
   	<link rel="stylesheet" href="styles/forms-placeholder.css">
-  	<link rel="stylesheet" href="styles/forms-reveal.text.css">
+    <link rel="stylesheet" href="styles/forms-reveal.text.css">
     <!-- endbuild -->
   </head>
   <body ng-app="angularModernizrApp">
@@ -51,7 +51,15 @@
     </div>
 
     <div class="container">
-    <div ng-view=""></div>
+      <div class="jumbotron">
+        <h1>Angular Modernizr</h1>
+        <p class="lead">
+          <img src="images/pic_angular.jpg" alt="Powered by Angular"><br>
+          Simple Angular Modernizr App.
+        </p>
+        <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+      </div>
+      <div ng-view=""></div>
     </div>
 
     <div class="footer">
@@ -119,6 +127,7 @@
         <script src="scripts/components/keyvaluepair.js"></script>
         <script src="scripts/components/container.js"></script>
         <script src="scripts/services/modernizrservice.js"></script>
+        <script src="scripts/directives/confirmdialog.js"></script>
         <!-- endbuild -->
 </body>
 </html>

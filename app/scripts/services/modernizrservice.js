@@ -10,8 +10,8 @@
 angular.module('angularModernizrApp')
   .service('modernizrService', function () {
     /*
-    * filter for onject attributes and return the matching state
-    * @Use (modernizrService)
+    * Filter for onject attributes and return the matching state
+    * @Whitin (modernizrService)
     * @(function)
     * @(object) options - is the widget to filter configuration options that contains the keywords
     * @(string) keyword - is the field you are filtering for as name of the options keyword
@@ -60,5 +60,25 @@ angular.module('angularModernizrApp')
         default:
           return optionsValue === searchValue;
       }
+    };
+    /*
+    * Call a scoped function inside a directive from the references function parameters
+    * @Whitin (modernizrService)
+    * @(function)
+    * @(function) fn - function to call
+    * @(object) scope - scope to apply as target in the function call
+    * @(object) args - object containing the arguments
+    */
+    this.callScopedFunction = function(fn, scope, args) {
+      if (typeof fn === 'function') {
+        var applied = fn.apply(scope, args);
+        if (applied) {
+          return applied.call(scope, args);
+        }
+        else {
+          return fn.call(scope, args);
+        }
+      }
+      return null;
     };
   });

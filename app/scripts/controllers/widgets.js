@@ -96,8 +96,8 @@ angular.module('angularModernizrApp')
     };
 
     $scope.mockValues = function(value) {
-      if (typeof value.value === 'string' && value.value.indexOf('SAVED: ')!==0) {
-        value.value = 'SAVED: ' + value.value;
+      if (typeof value.value === 'string' && value.value.indexOf('MOCKED:')!==0) {
+        value.value = 'MOCKED:' + value.value;
       }
       else if (angular.isArray(value.value)) {
         value.value.forEach(function(aValue) {
@@ -105,8 +105,19 @@ angular.module('angularModernizrApp')
         });
       }
     };
-    $scope.saveForm = function() {
-      $scope.saved=true;
+    this.confirmDialogVisible = false;
+    $scope.modifiedData = function modifiedData() {
+      var modifiedData = [];
+      if ($scope.widgetsCollection) {
+        $scope.widgetsCollection.forEach(function(widget) {
+          if (widget && widget.$ctrl && typeof widget.$ctrl.getValue === 'function') {
+            modifiedData.push(widget.$ctrl.getValue());
+          }
+        });
+      }
+      return modifiedData;
+    };
+    $scope.mockSave = function() {
       $scope.widgetsCollection.forEach(function(widget) {
         if (widget && widget.$ctrl && typeof widget.$ctrl.getValue === 'function' && typeof widget.$ctrl.setValue === 'function') {
           var value = widget.$ctrl.getValue();
@@ -114,7 +125,29 @@ angular.module('angularModernizrApp')
           widget.$ctrl.setValue(value);
         }
       });
+      // $scope.toggleState();
+    };
+    $scope.confirmSave = function() {
+      $scope.widgetsCollection.forEach(function(widget) {
+        if (widget && widget.$ctrl && typeof widget.$ctrl.getValue === 'function' && typeof widget.$ctrl.setValue === 'function') {
+          var value = widget.$ctrl.getValue();
+          widget.$ctrl.setValue(value);
+        }
+      });
       $scope.toggleState();
+    };
+    $scope.saveForm = function() {
+//      $scope.widgetCtrl.confirmDialogVisible = false;
+      $scope.widgetCtrl.confirmDialogVisible = true;
+      // $scope.saved=true;
+      // $scope.widgetsCollection.forEach(function(widget) {
+      //   if (widget && widget.$ctrl && typeof widget.$ctrl.getValue === 'function' && typeof widget.$ctrl.setValue === 'function') {
+      //     var value = widget.$ctrl.getValue();
+      //     $scope.mockValues(value);
+      //     widget.$ctrl.setValue(value);
+      //   }
+      // });
+      // $scope.toggleState();
     };
     $scope.reload = function() {
       $scope.widgetsCollection.forEach(function(widget) {

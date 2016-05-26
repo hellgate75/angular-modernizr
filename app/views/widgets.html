@@ -4,12 +4,21 @@
   <br/>
 </div>
 <div ng-controller="WidgetsCtrl as widgetCtrl">
+  <!--
+  title: '@',
+  visible: '=',
+  originalData: '=',
+  modifiedCallBack: '&',
+  confirmClickCallback: '&'
+ -->
+  <confirm-dialog title="Confirm to save (fake service)" visible="widgetCtrl.confirmDialogVisible" original-data="allOptionsBackup" modified-callback="modifiedData" confirm-click-callback="confirmSave"></confirm-dialog>
   <search-box filter-function="filterWidgets" total-widgets="calculateTotalWidgets()" filtered-widgets="getFiltredWidgets()" filter-text-model="filterText"></search-box>
   <br/>
   <br/>
   <form name="widgetsForm">
     <widget-container options="mainContainer">
       <button class="btn btn-secondary" ng-click="toggleState()" ng-if="!editMode" title="Go to edit mode" ng-disabled="!containsWidgets()">{{stateChangeText}}</button>
+      <button class="btn btn-secondary" ng-click="mockSave()" ng-if="!editMode" title="Go to edit mode" ng-disabled="!containsWidgets()">Mock</button>
       <button class="btn btn-primary" ng-click="reload()" ng-if="!editMode" title="Reset the orginal values" ng-disabled="!containsWidgets()">Reset</button>
       <button class="btn btn-secondary" ng-click="toggleState()" ng-if="editMode" title="Go to view mode" ng-disabled="!containsWidgets()">Cancel</button>
       <button class="btn btn-primary" ng-click="saveForm()" ng-if="editMode" title="Save the form data (Not persistent in test environment)" ng-disabled="!containsWidgets()">Save</button>
