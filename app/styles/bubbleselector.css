@@ -9,6 +9,8 @@
   padding: 5px;
   box-shadow: none;
   box-sizing: border-box;
+  overflow: visible;
+  display: inline-block;
 }
 .bubble-selector.ui-focus {
   border-radius: 5px !important;

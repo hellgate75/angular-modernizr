@@ -1,6 +1,6 @@
+<div ng-transclude></div>
 <div class="command-field"  ng-focus="focus($event)" ng-blur="blur($event)" ng-keypress="keypress($event)" ng-keyup="keyup($event)" contenteditable autocomplete="off" autocorrect="off" autocapitalize="off">
 </div>
 <div class="command-field-validator{{validityClass()}}"></div>
 <div class="command-field-message-empty" ng-if="emptyFieldStatus && !elementValid">{{$ctrl.emptyFieldMessage}}</div>
 <div class="command-field-message-incomplete" ng-if="messageVisible && !elementValid && !emptyFieldStatus">{{$ctrl.incompleteFieldMessage}}</div>
-<div ng-transclude></div>
