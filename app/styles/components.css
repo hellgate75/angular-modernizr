@@ -26,3 +26,21 @@
 .btn, .btn:focus {
   outline: none;
 }
+@media screen and (min-width: 320px) and (max-width: 359px) {
+  * {
+    font-size: 90%;
+  }
+  .btn, .btn * {
+    font-size: 90%;
+  }
+
+}
+@media screen and (min-width: 360px) and (max-width: 420px) {
+  * {
+    font-size: 90%;
+  }
+  .btn, .btn * {
+    font-size: 90%;
+  }
+
+}
